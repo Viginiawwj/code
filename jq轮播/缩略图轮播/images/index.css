@@ -1,0 +1,48 @@
+@charset "utf-8"
+/*base*/
+
+html{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0;padding:0}
+
+img{vertical-align:middle}
+
+ul,ol{list-style:none outside none;}
+
+/* a标签 */
+a{color:#666;text-decoration:none;cursor:pointer;outline:none}
+/*带下划线的链接*/
+a.unl:link,a.unl:visited,a.unl:hover,a.unl:active{text-decoration:underline;}
+
+
+#information-img{ width: 1020px; margin: 4em auto 0em;}
+.img-box{margin:0px auto 0 auto;height:400px;overflow:hidden;position:relative;width:680px;}
+.mask{height:100px;overflow:hidden;background:#000;opacity:0.7;filter:alpha(opacity:70);width:100%;position:absolute;left:0;bottom:0;z-index:1;border-top:solid 2px #ddd;}
+.large-img{overflow:hidden;position:absolute;}
+.silder_panel{width:680px;height:400px;overflow:hidden;float:left;position:relative;}
+.silder_panel img{width:680px;height:400px;display:block;overflow:hidden;overflow:hidden}
+.small-img li{float:left;padding:0px;border:1px solid #fff;margin:2px;display:inline;position:relative;}
+.small-img li.current{border:3px solid #7acf39;margin:0 4px;}
+.small-img li,.small-img img{display:block;width:100px;height:48px;overflow:hidden;}
+.img-box a.prev,.img-box a.next{
+    display:block;
+    width:60px;
+    height:60px;
+    line-height:999em;
+    overflow:hidden;
+    z-indent:9;
+    position:absolute;
+    cursor:pointer;
+    margin:140px 0 0 0;
+    background: #000;
+}
+.img-box a.prev{
+    left:0;
+    background-position:left 0;}
+.img-box a.next{right:0;background-position:right 0;}
+.silder_intro{position:absolute;left:30;bottom:0;z-index:9;width:400px;height:100px;overflow:hidden;color:#fff;padding-left:20px;}
+.silder_intro h3{font-size:20px;font-weight:bold;margin:10px 0 5px 0;height:22px;line-height:22px;}
+.silder_intro p{font-size:12px;line-height:20px;}
+.dec{float:right;height:100px;bottom:-10px;right:10px;overflow:hidden;z-index:9;position:absolute;}
+.dec li{margin-top:20px;float:left;display:inline;}
+
+

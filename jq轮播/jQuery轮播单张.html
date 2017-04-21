@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播</title>
+    <style>
+        *{padding: 0;margin: 0;list-style: none;}
+        .banner{margin: 100px auto;border: 2px solid black;width: 900px;height: 300px;overflow: hidden;position: relative}
+        .banner .img{width: 2700px;position: absolute;left: 0;top: 0}
+        .banner .img span{width: 300px;float: left}
+        .banner .img img{width: 300px;height: 200px}
+        .banner .btn{width: 30px;height: 50px;background: #000;
+        position: absolute;top: 50%;margin-top: -25px;cursor: pointer;text-align: center;line-height: 50px;color: white;
+        font-size: 30px;}
+        .banner:hover .btn{display: block}
+        .banner .btn-l{left: 0}
+        .banner .btn-r{right: 0}
+        .banner .cu{width: 900px;position: absolute;top:0;}
+        .banner .cu span{width: 300px;height: 200px;float: left}
+        .banner .cu span img{width: 300px;height: 200px}
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>
+        $(document).ready(function(){
+                for(var i=0;i<3;i++){
+                    var clone=$(".banner .img span").eq(i).clone();
+                    $(".banner .cu").append(clone);
+                }
+                var size=$(".banner .img span").size();
+                if(size%3==0){
+                var n=Math.floor(size/3);
+                }else {
+                     n=Math.floor(size/3)+1;
+                }
+                var speed=parseInt($(".banner").css('width'));
+                var w=speed*(n-1);
+                $(".banner .cu").css({left:w+"px"});
+
+            //自动轮播
+            var t=setInterval(moveR,2000);
+            $(".banner").hover(function(){
+                clearInterval(t);
+            },function(){
+                t=setInterval(moveR,2000);
+            });
+            $(".banner .btn-l") .click(function(){
+                moveL();
+            });
+            //向右
+            $(".banner .btn-r") .click(function(){
+                moveR();
+            });
+            var i=0;
+                function moveR(){
+                    i++;
+
+                    if(i==n){
+                        $(".banner .img").css({left:0});
+                        i=1;
+                    }
+
+                    $(".banner .img").stop().animate({left:-i*speed},500);
+
+
+                }
+                function  moveL(){
+                    i--;
+
+                    if(i==-1){
+                        $(".banner .img").css({left:-(n-1)*speed});
+                        i=2;
+                    }
+                    $(".banner .img").stop().animate({left:-i*speed},500);
+                }
+
+        })
+    </script>
+</head>
+<body>
+<div class="banner">
+    <div class="img">
+        <span><img src="img/img1.jpg"></span>
+        <span><img src="img/img2.jpg"></span>
+        <span><img src="img/img3.jpg"></span>
+        <span><img src="img/img2.jpg"></span>
+        <span><img src="img/img2.jpg"></span>
+        <span><img src="img/img2.jpg"></span>
+
+
+        <div class="cu"></div>
+    </div>
+
+    <ul class="btn btn-l">&lt;</ul>
+    <ul class="btn btn-r">&gt;</ul>
+</div>
+</body>
+</html>

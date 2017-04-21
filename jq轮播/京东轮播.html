@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>京东轮播图</title>
+    <style>
+        *{padding: 0;margin: 0}
+        ul{list-style: none;}
+        .out{width: 450px;height: 300px;margin: 100px auto;border: 3px solid black;position: relative}
+        .out .img li{position: absolute;top: 0;left: 0px;display: none;}
+        .out .num{position: absolute;left: 0;font-size: 0;text-align: center;
+            width: 100%;bottom: 20px}
+        .out .num li{width: 20px;height: 20px;background-color: #666;color: #ffffff;text-align: center;
+        line-height: 20px;border-radius:50%;display: inline-block;font-size: 16px;margin: 0 3px;cursor: pointer}
+        .out .num li.active{background: firebrick}
+        .btn{position: absolute;width: 20px;height: 50px;background: rgba(0,0,0,0.5);color: white;line-height: 50px;text-align: center  ;
+        font-size: 40px;top: 50%;margin-top: -25px;display: none;cursor: pointer}
+        .out .left { left: 0}
+        .out .right { right: 0}
+        .out:hover .btn{display: block}
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>
+        $(function(){
+            //初始化
+            var size=$(".img li").size();
+            for (var j=1;j<=size;j++){
+                var li="<li>"+j+"</li>";
+                $(".num").append(li);
+            }
+            //手动轮播
+            var i=0;
+            $(".img li").first().show();
+            $(".num li").first().addClass("active");
+            $(".num li").mouseover(function(){
+                $(this).addClass("active").siblings().removeClass("active");
+                var index=$(this).index();
+                i= index;
+                $(".img li").eq(index).stop().fadeIn(300).siblings().stop().fadeOut(300);
+            })
+            //自动轮播
+            var i=0;
+            var t=setInterval(move,1500);
+            function move(){
+                i++;
+                if(i==size){
+                    i=0;
+                }
+                $(".num li").eq(i).addClass("active").siblings().removeClass("active");
+                $(".img li").eq(i).fadeIn(300).siblings().fadeOut(300);
+            }
+            function moveL(){
+                i--;
+                if(i==-1){
+                    i=size-1;
+                }
+                $(".num li").eq(i).addClass("active").siblings().removeClass("active");
+                $(".img li").eq(i).fadeIn(300).siblings().fadeOut(300);
+            }
+            //关闭定时器
+            $(".out").hover(function(){
+                clearInterval(t);
+            },function(){
+                t=setInterval(move,1500);
+            });
+            $(".left").click(function(){
+                moveL();
+            })
+            $(".right").click(function(){
+                     move()
+            })
+
+
+        })
+    </script>
+</head>
+<body>
+<div class="out">
+    <ul class="img">
+        <li><a href="#"><img src="img/img1.jpg" alt=""></a></li>
+        <li><a href="#"><img src="img/img2.jpg" alt=""></a></li>
+        <li><a href="#"><img src="img/img3.jpg" alt=""></a></li>
+        <li><a href="#"><img src="img/img4.jpg" alt=""></a></li>
+        <li><a href="#"><img src="img/img5.jpg" alt=""></a></li>
+    </ul>
+    <ul class="num">
+
+    </ul>
+    <div class="btn left ">&lt;</div>
+    <div class="btn right ">&gt;</div>
+</div>
+</body>
+</html>
