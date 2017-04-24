@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <style>
+        *{padding: 0;
+            margin: 0;}
+        .wapper{
+            width: 200px;
+            margin: 30px auto;
+        }
+        .error{
+            color: #a10;
+        }
+         /*.error{*/
+            /*display: none;*/
+        /*}*/
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="SignUpController">
+<div class="wapper">
+    <form name="SignUpForm" ng-submit="submitForm()">
+        <h2>注册</h2>
+        <div class="form-group">
+            <label>用户名</label>
+            <!--<pre>{{SignUpForm.username.$valid}}</pre>-->
+            <input name="username"
+                   type="text"
+                   class="form-control"
+                   ng-model="userData.username"
+                   ng-minlength="4"
+                   ng-maxlength="10"
+                   required
+            >
+            <p class="text-warning" ng-if="SignUpForm.username.$error.required && SignUpForm.username.$touched ">
+                不能为空!
+            </p>
+            <p class="text-warning"
+               ng-if="SignUpForm.username.$error.minlength ||
+                SignUpForm.username.$error.maxlength"
+            >用户名应该在合适长度</p>
+        </div>
+        <div class="form-group">
+            <label>密码</label>
+            <input type="password" name="password" class="form-control"
+                   ng-model="userData.password" ng-minlength="6" ng-maxlength="12" required>
+            <p class="text-warning" ng-if="SignUpForm.password.$error.required && SignUpForm.password.$touched ">
+                不能为空!
+            </p>
+            <p class="text-warning"
+               ng-if="SignUpForm.password.$error.minlength ||
+                SignUpForm.password.$error.maxlength"
+            >应该在合适长度</p>
+        </div>
+
+        <div class="form-group">
+            <label>确认密码</label>
+            <pre>{{SignUpForm.password2.$valid}}</pre>
+            <input type="password" name="password2" class="form-control"
+                   ng-model="userData.password2"
+                   compare="userData.password"
+                   ng-minlength="6"
+                   ng-maxlength="12"
+                   required
+            >
+            <p class="text-warning" ng-if="SignUpForm.password2.$error.compare && SignUpForm.password2.$touched ">
+                不一致
+            </p>
+        </div>
+
+
+        <div class="form-group">
+            <button class="btn btn-primary">注册</button>
+        </div>
+    </form>
+</div>
+
+
+<script src="js/angular.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
